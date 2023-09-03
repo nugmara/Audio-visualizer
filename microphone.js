@@ -5,7 +5,8 @@ class Microphone {
         .then(function(stream) {
             this.audioContext = new AudioContext();
             this.microphone = this.audioContext.createMediaStreamSource(stream);
-            this.analyzer.fitSize = 512;
+            this.analyzer = this.audioContext.createAnalyser(); // Create an AnalyserNode
+            this.analyzer.fftSize = 512;
             const bufferLength = this.analyzer.frequencyBinCount;
             this.dataArray = new Uint8Array(bufferLength);
             this.microphone.connect(this.analyzer);
