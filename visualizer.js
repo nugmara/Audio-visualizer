@@ -11,9 +11,9 @@ class Ball {
         this.y = y;
         this.radius = 8;
         this.color = "white";
-        this.jumpForce = 0;
+        this.jumpForce = 10;
         this.fallForce = 0.1;
-
+        this.isFalling = true;
     }
 
     draw() {
@@ -24,11 +24,15 @@ class Ball {
     }
 
     fall() {
-
+        this.jumpForce = 0;
+        this.y += this.fallForce
+        this.fallForce += 0.5;
     }
 
     jump() {
-
+        this.fallForce = 0;
+        this.y -= this.jumpForce;
+        this.jumpForce -= 0.5;
     }
 }
 
@@ -37,20 +41,33 @@ const generateBalls = () => {
     const distance = 30;
     const amountOfBalls = (canvas.width / distance) - 2;
     for (let i = 0; i < amountOfBalls;  i++) {
-        balls.push(new Ball(distance + (i * distance), 500))
+        balls.push(new Ball(distance + (i * distance), 300))
     }
 }
 
 generateBalls();
 
-balls.forEach(ball => {
-    ball.draw()
-})
 
 function animate() {
     if (microphone.initialized) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height)
         const samples = microphone.getSamples();
-        //console.log(samples)
+        balls.forEach(ball => {
+            if (ball.isFalling && ball.y < canvas.height / 2) {
+                ball.fall()
+            } else if (ball.y > canvas.height / 2) {
+                ball.isFalling = false;
+                ball.jumpForce = 10;
+                // balls jump force
+            }
+            if (ball.isFalling == false) {
+                ball.jump()
+                if (ball.jumpForce <= 0) {
+                    ball.isFalling = true;
+                }
+            }
+            ball.draw()
+        })
     }
     requestAnimationFrame(animate)
 }
