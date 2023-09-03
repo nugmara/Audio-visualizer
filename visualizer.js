@@ -28,14 +28,29 @@ class Ball {
     }
 
     jump() {
-        
+
     }
 }
+
+let balls = [];
+const generateBalls = () => {
+    const distance = 30;
+    const amountOfBalls = (canvas.width / distance) - 2;
+    for (let i = 0; i < amountOfBalls;  i++) {
+        balls.push(new Ball(distance + (i * distance), 500))
+    }
+}
+
+generateBalls();
+
+balls.forEach(ball => {
+    ball.draw()
+})
 
 function animate() {
     if (microphone.initialized) {
         const samples = microphone.getSamples();
-        // console.log(samples)
+        //console.log(samples)
     }
     requestAnimationFrame(animate)
 }
