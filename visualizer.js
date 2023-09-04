@@ -34,7 +34,7 @@ class Ball {
         this.y -= this.jumpForce;
         this.jumpForce -= 0.5;
     }
-}
+ }
 
 let balls = [];
 const generateBalls = () => {
@@ -52,12 +52,13 @@ function animate() {
     if (microphone.initialized) {
         ctx.clearRect(0, 0, canvas.width, canvas.height)
         const samples = microphone.getSamples();
-        balls.forEach(ball => {
+        balls.forEach((ball, index) => {
+            console.log(samples[index])
             if (ball.isFalling && ball.y < canvas.height / 2) {
                 ball.fall()
             } else if (ball.y > canvas.height / 2) {
                 ball.isFalling = false;
-                ball.jumpForce = 10;
+                ball.jumpForce = Math.abs(samples[index]) * 20;
                 // balls jump force
             }
             if (ball.isFalling == false) {
