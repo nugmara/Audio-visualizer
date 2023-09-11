@@ -2,6 +2,8 @@
 
 # Microphone Audio Visualization with Animated Balls
 
+<img src="./images/audio-visualizer.gif"/>
+
 This project demonstrates how to create a simple audio visualization using the microphone input and animated balls. It uses the Web Audio API to capture audio from the user's microphone and creates bouncing balls on an HTML5 canvas that react to the audio input.
 
 ## Prerequisites
