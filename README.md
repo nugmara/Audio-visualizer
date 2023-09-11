@@ -15,9 +15,9 @@ Before running the project, make sure you have the following:
 
 1. Clone this repository to your local machine:
 
-   \\\bash
+   \\ bash
    git clone https://github.com/nugmara/Audio-visualizer.git
-   \\\
+   \\
 
 2. Open the `index.html` file in your web browser or serve it using a web server.
 
